@@ -19,11 +19,16 @@
 					<input type="submit" value="Log Out" />
 				</form>
 				
-				<h3>Threads: </h3>
+				<h3>Ideas: </h3>
 				
 				<div class="masonry_container">
-					<p th:each="thread : ${threads}">
-						<a th:href="@{/(thread=${thread.uuid})}" th:text="${thread.uuid}"></a>
+					<p th:each="idea : ${ideas}" th:with="categories=${idea.categories}" th:class="${categories[0].name}">
+						<a th:href="@{/(idea=${idea.uuid})}" th:text="${idea.uuid}"></a>
+						<span th:text="${idea.body}"></span>
+						
+						<div th:each="category : ${categories}" th:remove="tag">
+							<span th:text="${category.name}"></span>
+						</div>
 					</p>
 				</div>
 	

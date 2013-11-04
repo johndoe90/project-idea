@@ -19,10 +19,4 @@ public interface CommentRepository extends GraphRepository<Comment>/*, NamedInde
 			      + "return comment "
 			         + "order by comment.created desc")
 	List<Comment> findAllFromThread(String threadUUID, Pageable p);
-	
-	/*@Query("start thread=node:" + Indices.UUID.INDEX_NAME + "(" + Indices.UUID.FIELD_NAME + " = {0}) "
-			   + "match thread-[r:" + Relationship.COMMENT +"]->comment "
-			      + "return comment "
-			         + "order by comment.created desc")
-	Page<Comment> findAllFromThread2(String threadUUID, Pageable p);*/
 }

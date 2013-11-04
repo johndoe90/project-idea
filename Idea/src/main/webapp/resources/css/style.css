@@ -21,3 +21,15 @@ ul li{
 	padding: 10px 10px;
 	width: 272px;
 }
+
+.other{
+	background: green;
+}
+
+.Technology{
+	background: blue;
+}
+
+.fashion{
+	background: pink;
+}

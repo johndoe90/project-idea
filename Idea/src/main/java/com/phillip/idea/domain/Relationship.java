@@ -10,8 +10,11 @@ public final class Relationship {
 	public static final String REPLY = "REPLY";
 	public static final String SOCIAL = "SOCIAL";
 	public static final String PASSWORD_RESET_REQUEST = "PASSWORD_RESET_REQUEST";
+	public static final String SUBCATEGORY = "SUBCATEGORY";
+	public static final String IDEA = "IDEA";
+	public static final String HAD_IDEA = "HAD_IDEA";
 	
 	public enum Types implements RelationshipType {
-		COMMENT, WRITTEN, LIKES, DISLIKES, REPLY, SOCIAL, PASSWORD_RESET_REQUEST
+		COMMENT, WRITTEN, LIKES, DISLIKES, REPLY, SOCIAL, PASSWORD_RESET_REQUEST, SUBCATEGORY, IDEA, HAD_IDEA
 	}
 }

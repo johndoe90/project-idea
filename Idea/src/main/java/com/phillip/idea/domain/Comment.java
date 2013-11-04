@@ -91,7 +91,5 @@ public class Comment extends NodeIdentity implements Comparable<Comment>{
 			return 0;
 		else
 			return -1;
-	}	
-	
-	
+	}		
 }

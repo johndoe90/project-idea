@@ -20,10 +20,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.aspects.core.NodeBacked;
 import org.springframework.data.neo4j.mapping.MappingPolicy;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.phillip.idea.domain.Comment;
+import com.phillip.idea.domain.Principal;
 import com.phillip.idea.domain.Relationship;
 import com.phillip.idea.domain.Thread;
 import com.phillip.idea.domain.User;
@@ -34,9 +36,6 @@ import com.phillip.idea.service.UserService;
 
 @Service
 public class CommentServiceImpl extends Neo4jServiceImpl<Comment> implements CommentService{
-
-	@Inject
-	private UserService userService;
 	
 	private final CommentRepository commentRepo;
 	
@@ -46,6 +45,10 @@ public class CommentServiceImpl extends Neo4jServiceImpl<Comment> implements Com
 		this.commentRepo = commentRepo;
 	}
 
+	private User getUserFromSession(){
+		return ((Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+	}
+	
 	private boolean relatedTo(NodeBacked startNode, NodeBacked endNode, String type){
 		return startNode.getRelationshipTo(endNode, type) != null ? true : false;
 	}
@@ -118,7 +121,7 @@ public class CommentServiceImpl extends Neo4jServiceImpl<Comment> implements Com
 	@Transactional
 	public void likeComment(Comment comment) {
 		notNull(comment);
-		User user = userService.getUserFromSession();
+		User user = getUserFromSession();
 		if(!relatedTo(user, comment, Relationship.LIKES) && !relatedTo(user, comment, Relationship.DISLIKES)){
 			comment.setLikes(comment.getLikes() + 1);
 			comment.persist();
@@ -131,7 +134,7 @@ public class CommentServiceImpl extends Neo4jServiceImpl<Comment> implements Com
 	@Transactional
 	public void dislikeComment(Comment comment) {
 		notNull(comment);
-		User user = userService.getUserFromSession();
+		User user = getUserFromSession();
 		if(!relatedTo(user, comment, Relationship.LIKES) && !relatedTo(user, comment, Relationship.DISLIKES)){
 			comment.setLikes(comment.getLikes() - 1);
 			comment.persist();

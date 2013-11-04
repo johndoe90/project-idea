@@ -1,20 +1,11 @@
 package com.phillip.idea.config;
 
-import javax.inject.Inject;
-
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.data.neo4j.config.EnableNeo4jRepositories;
-import org.springframework.data.neo4j.config.Neo4jConfiguration;
-import org.springframework.data.neo4j.lifecycle.BeforeSaveEvent;
-import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.phillip.idea.miscellaneous.UUIDTransactionEventHandler;
@@ -32,11 +23,6 @@ public class Neo4jConfig {
 		
 		return graphDbService; 
 	}
-	
-	/*@Bean
-	public ApplicationListener<BeforeSaveEvent> beforeSaveEventApplicationListener(){
-		return new BeforeSavedEventListener();
-	}*/
 }
 
 /*@Configuration

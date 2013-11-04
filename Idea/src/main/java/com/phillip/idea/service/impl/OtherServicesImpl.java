@@ -12,6 +12,7 @@ import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.phillip.idea.domain.Category;
 import com.phillip.idea.domain.Indices;
 import com.phillip.idea.domain.PasswordResetRequest;
 import com.phillip.idea.service.OtherServices;
@@ -26,17 +27,18 @@ public class OtherServicesImpl implements OtherServices{
 		this.template = template;
 	}
 
-	private Node findNodeByUUID(String uuid){
+	private <T> T findOneByUUID(String uuid, Class<T> clazz){
 		Index<Node> uuidIndex = template.getGraphDatabase().getIndex(Indices.UUID.INDEX_NAME);
-		return uuidIndex.get(Indices.UUID.FIELD_NAME, uuid).getSingle();
+		Node node = uuidIndex.get(Indices.UUID.FIELD_NAME, uuid).getSingle();
+		
+		return node != null ? template.createEntityFromState(node, clazz, MappingPolicy.DEFAULT_POLICY) : null;
 	}
 	
 	@Override
 	public PasswordResetRequest findOnePasswordResetRequest(String uuid) {
 		notNull(uuid);
-		Node node = findNodeByUUID(uuid);
 		
-		return node != null ? template.createEntityFromState(node, PasswordResetRequest.class, MappingPolicy.DEFAULT_POLICY) : null;
+		return findOneByUUID(uuid, PasswordResetRequest.class);
 	}
 
 	@Override
@@ -54,4 +56,13 @@ public class OtherServicesImpl implements OtherServices{
 			node.delete();
 		}
 	}
+	
+	@Override
+	public Category findOneCategory(String uuid){
+		notNull(uuid);
+
+		return findOneByUUID(uuid, Category.class);
+	}
+	
+	
 }

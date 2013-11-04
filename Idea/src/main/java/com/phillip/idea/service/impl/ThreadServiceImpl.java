@@ -11,23 +11,19 @@ import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 
 import com.phillip.idea.domain.Thread;
-import com.phillip.idea.repository.ThreadRepository;
 import com.phillip.idea.service.ThreadService;
 
 @Service
 public class ThreadServiceImpl extends Neo4jServiceImpl<Thread> implements ThreadService{
-	
-	private final ThreadRepository threadRepo;
-	
+		
 	@Inject
-	public ThreadServiceImpl(Neo4jTemplate template, ThreadRepository threadRepo){
+	public ThreadServiceImpl(Neo4jTemplate template){
 		super(template, Thread.class);
-		this.threadRepo = threadRepo;
 	}
 
 	@Override
 	public List<Thread> findAll() {
-		EndResult<Thread> result = threadRepo.findAll();
+		EndResult<Thread> result = template.findAll(Thread.class);
 		if(result == null)
 			return Collections.emptyList();
 		

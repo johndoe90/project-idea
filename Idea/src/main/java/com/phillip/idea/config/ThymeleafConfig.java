@@ -20,7 +20,6 @@ public class ThymeleafConfig {
 	public ClassLoaderTemplateResolver emailTemplateResolver(){
 		ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
 		resolver.setPrefix("mail/");
-		//resolver.setSuffix(".html");
 		resolver.setTemplateMode("HTML5");
 		resolver.setCharacterEncoding("UTF-8");
 		resolver.setOrder(1);
@@ -53,15 +52,8 @@ public class ThymeleafConfig {
 		Set<TemplateResolver> resolvers = new HashSet<TemplateResolver>();
 		resolvers.add(emailTemplateResolver());
 		resolvers.add(templateResolver());
-		//engine.setT
-		
-		
-		//engine.addTemplateResolver(emailTemplateResolver());
-		//engine.addTemplateResolver(templateResolver());
-		
-		//engine.setTemplateResolver(templateResolver());
+
 		engine.setTemplateResolvers(resolvers);
-		
 		engine.addDialect(springSecurityDialect());
 		
 		return engine;

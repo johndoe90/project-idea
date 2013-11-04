@@ -1,7 +1,6 @@
 package com.phillip.idea.config;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +9,6 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.social.UserIdSource;
@@ -21,7 +19,6 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.ConnectionRepository;
 import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.connect.web.ConnectController;
 import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.social.connect.web.ReconnectFilter;
@@ -34,15 +31,11 @@ import org.springframework.social.linkedin.api.LinkedIn;
 import org.springframework.social.linkedin.connect.LinkedInConnectionFactory;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import com.phillip.idea.miscellaneous.SimpleSignInAdapter;
 import com.phillip.idea.service.SocialConnectionService;
 import com.phillip.idea.service.UserService;
 import com.phillip.idea.social.Neo4jUsersConnectionRepository;
-import com.phillip.idea.social.facebook.PostToWallAfterConnectInterceptor;
-import com.phillip.idea.social.facebook.PostToWallAfterProviderSignInInterceptor;
-import com.phillip.idea.social.twitter.TweetAfterConnectInterceptor;
 
 @Configuration
 @EnableSocial
@@ -50,9 +43,6 @@ public class SpringSocialConfig implements SocialConfigurer{
 
 	@Inject
 	private UserService userService;
-	
-	@Inject
-	private ConnectionFactoryLocator connectionFactoryLocator;
 	
 	@Inject
 	private SocialConnectionService connectionService;

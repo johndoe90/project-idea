@@ -8,23 +8,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-
-import com.phillip.idea.miscellaneous.SmartCookieLocaleResolver;
 
 @Configuration
-public class i18nConfig /*extends WebMvcConfigurerAdapter*/{
-	
-	/*@Override
+public class i18nConfig extends WebMvcConfigurerAdapter{
+		
+	@Override
 	public Validator getValidator() {
 		return validator();
-	}*/
+	}
 	
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
+	}
+
 	@Bean
 	public LocalValidatorFactoryBean validator(){
 		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
@@ -57,12 +58,4 @@ public class i18nConfig /*extends WebMvcConfigurerAdapter*/{
 		
 		return localeResolver;
 	}
-	
-	/*@Bean
-	public RequestMappingHandlerMapping handlerMapping(){
-		RequestMappingHandlerMapping handlerMapping = new RequestMappingHandlerMapping();
-		handlerMapping.setInterceptors(new Object[] {localeChangeInterceptor()});
-		
-		return handlerMapping;
-	}*/
 }

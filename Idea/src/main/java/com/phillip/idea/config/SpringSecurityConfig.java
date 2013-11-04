@@ -2,13 +2,10 @@ package com.phillip.idea.config;
 
 import javax.inject.Inject;
 
-import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,7 +18,7 @@ import com.phillip.idea.service.UserService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true/*, mode = AdviceMode.ASPECTJ, proxyTargetClass = true*/)
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Inject
@@ -46,12 +43,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		  .csrf().disable()
 	      .authorizeRequests()
-		     /*.antMatchers("/resources/**", "/init/**").permitAll()
-		     .antMatchers("/comment/like", "/comment/dislike", "/comment/reply", "/comment/add").access("hasRole('ROLE_USER')")
-		     .antMatchers("/**").permitAll()*/
-	      	 .antMatchers("/socialSignup", "/test/**").permitAll()
+	      	 .antMatchers("/**").permitAll()
+	      	 /*.antMatchers("/socialSignup", "/test/**").permitAll()
 	      	 .antMatchers("/", "/auth/signin", "/signin/**", "/signup/**", "/comment/template", "/comment/**", "/thread/add", "/mail", "/forgotPassword", "/resetPassword/**", "/profile/resetPassword").permitAll() 
-	      	 .antMatchers("/connect/**", "/profile/**", "/**").access("hasRole('ROLE_USER')")
+	      	 .antMatchers("/connect/**", "/profile/**", "/**").access("hasRole('ROLE_USER')")*/
 		     .and()
 		  .logout().logoutUrl("/logout").logoutSuccessUrl("/")
 		  .and()

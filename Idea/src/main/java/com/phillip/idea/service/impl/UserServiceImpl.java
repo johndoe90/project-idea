@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.index.Index;
+import org.springframework.data.neo4j.aspects.core.NodeBacked;
 import org.springframework.data.neo4j.mapping.MappingPolicy;
 import org.springframework.data.neo4j.support.Neo4jTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +28,18 @@ public class UserServiceImpl extends Neo4jServiceImpl<User> implements UserServi
 	}
 	
 	@Override
+	public User getUserFromSession() {
+		return ((Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+	}
+	
+	@Override
+	public void setUserInSession(User user){
+		Principal principal = new Principal(user);
+		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(principal, principal.getUser().getPassword(), principal.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+	}
+	
+	@Override
 	public User findUserByEmail(String email) {
 		Index<Node> uuidIndex = graphDb.getIndex(Indices.EMAIL.INDEX_NAME);
 		Node userNode = uuidIndex.get(Indices.EMAIL.FIELD_NAME, email.toLowerCase()).getSingle();
@@ -43,17 +56,5 @@ public class UserServiceImpl extends Neo4jServiceImpl<User> implements UserServi
 			throw new UsernameNotFoundException("Username " + email + " not found!");
 		
 		return new Principal(user);
-	}
-
-	@Override
-	public User getUserFromSession() {
-		return ((Principal) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
 	}	
-	
-	@Override
-	public void setUserInSession(User user){
-		Principal principal = new Principal(user);
-		UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(principal, principal.getUser().getPassword(), principal.getAuthorities());
-		SecurityContextHolder.getContext().setAuthentication(auth);
-	}
 }
