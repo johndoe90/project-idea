@@ -1,0 +1,3 @@
+<div th:each="comment : ${comments}" th:remove="tag">
+	<div th:substituteby="comment/renderComment :: renderComment" th:with="comment=${comment}"></div>
+</div>

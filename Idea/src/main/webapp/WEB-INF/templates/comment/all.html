@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+      
+	<head>
+      	<title>Home</title>
+      	<script type="text/javascript" src="/resources/js/jQuery.js"></script>
+      	<script type="text/javascript" src="/resources/js/pure.js"></script>
+	</head>
+	
+	<body>
+		<h3>HOME2</h3>
+		<span th:each="comment : ${comments}">
+			<span th:text="${comment.body} + '  ' + ${comment.likes}"></span>
+			<br />
+		</span>
+		
+		<script>
+			domain = location.protocol + "//" + location.host;
+		</script>
+		<script type="text/javascript" src="/resources/js/comment.js"></script>
+	</body>
+	
+</html>

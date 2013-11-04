@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+      
+	<head th:include="common/head :: head" th:with="title='SignIn'"></head>
+	<body>
+		<div class="container">
+			<header th:include="common/header :: header"></header>
+	
+			SIGNIN
+			
+			<div sec:authorize="${hasRole('ROLE_USER')}">
+				You are already signed in
+			</div>
+			<div sec:authorize="${not hasRole('ROLE_USER')}">
+				<form th:substituteby="common/miscellaneous :: signin_facebook"></form>
+				<form th:substituteby="common/miscellaneous :: signin_twitter"></form>
+				<form th:substituteby="common/miscellaneous :: signin_linkedin"></form>
+		        <form th:substituteby="common/miscellaneous :: signin_google"></form>
+		        <div th:substituteby="common/miscellaneous :: signin_local" th:with="localSigninForm=${localSigninForm}"></div>
+			</div>
+			
+			<footer th:include="common/footer :: footer"></footer>
+		</div>
+	</body>
+</html>                     
+                      

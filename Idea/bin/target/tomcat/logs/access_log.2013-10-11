@@ -1,0 +1,13 @@
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:34:33 +0200] "GET /template/ HTTP/1.1" 302 - http-bio-8080-exec-1 71
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:34:33 +0200] "GET /template/login HTTP/1.1" 200 559 http-bio-8080-exec-2 9
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:34:38 +0200] "POST /template/login HTTP/1.1" 302 - http-bio-8080-exec-3 6
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:34:39 +0200] "GET /template/ HTTP/1.1" 200 166 http-bio-8080-exec-4 946
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:49:21 +0200] "GET /template/ HTTP/1.1" 500 12244 http-bio-8080-exec-1 115
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:53:35 +0200] "GET /template/ HTTP/1.1" 200 166 http-bio-8080-exec-1 659
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:35 +0200] "GET /template HTTP/1.1" 302 - http-bio-8080-exec-3 0
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:35 +0200] "GET /template/ HTTP/1.1" 302 - http-bio-8080-exec-4 15
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:35 +0200] "GET /template/login HTTP/1.1" 200 559 http-bio-8080-exec-5 2
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:35 +0200] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-6 0
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:35 +0200] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:40 +0200] "POST /template/login HTTP/1.1" 302 - http-bio-8080-exec-8 6
+0:0:0:0:0:0:0:1 - - [11/Oct/2013:21:55:40 +0200] "GET /template/ HTTP/1.1" 200 166 http-bio-8080-exec-9 183

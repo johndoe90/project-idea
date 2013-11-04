@@ -1,0 +1,27 @@
+<div th:fragment="renderComment" th:object="${comment}" th:id="*{uuid}" class="comment">
+	<div class="media">
+		<a class="pull-left" th:href="@{'/profile/' + *{uuid}}">
+			<img class="media-object" th:src="*{user.imageUrl}" width="56px" height="56px" />
+		</a>
+		<div class="media-body">
+			<a th:href="@{'/profile/' + *{uuid}}"><span th:text="*{user.displayName}"></span></a>
+			<span th:text="${T(com.phillip.challenge.miscellaneous.DateUtils).convertDate(#object.created)}"></span><br /> 
+			<span th:text="*{body}"></span>
+			<div>
+				<a class="reply" href="javascript:void(0);">
+					<span>Reply</span>
+				</a>
+				<span th:text="*{likes}"></span>
+				<a class="like" href="javascript:void(0);">
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+				</a>
+				<a class="dislike" href="javascript:void(0);">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+				</a>
+				<div th:if="*{hasParent}" th:remove="tag">
+					<span>in reply to <a class="show-parent" href="javascript:void(0);">... (show)</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

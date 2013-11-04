@@ -1,0 +1,19 @@
+<div id="{comment.uuid}" class="comment" style="margin-top: 5px;">
+	<div class="media">
+		<a class="pull-left" href="{comment.profileUrl}"> 
+			<img class="media-object" src="{comment.user.imageUrl}" width="48px" height="48px"/>
+		</a>
+		<div class="media-body">	
+			<a href="{comment.profileUrl}"><span style="font-size: 12px;">{comment.user.displayName}</span></a>
+			<span style="font-size: 12px;">{comment.time}</span><br />
+			<span style="font-size: 12px;">{comment.body}</span>
+			<div>
+				<a class="reply" href="javascript:void(0);"><span style="font-size: 12px;">Reply</span></a>
+				<span style="font-size: 12px;">  {comment.likes}</span>
+				<a class="like" href="javascript:void(0);"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+				<a class="dislike" href="javascript:void(0);"><span class="glyphicon glyphicon-thumbs-down"></span></a>
+				<a class="show_parent" href="javascript:void(0);"><span style="font-size: 12px;">{comment.hasParent}</span></a>
+			</div>
+		</div>
+	</div>
+</div>

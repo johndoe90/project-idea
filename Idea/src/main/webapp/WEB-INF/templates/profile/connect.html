@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+    
+    <head th:include="common/head :: head" th:with="title='Connect'"></head>
+    
+	<body>
+		<div class="container">
+			<header th:include="common/header :: header"></header>
+				
+				<span sec:authentication="principal.user.uuid"></span>
+				
+				<h4>ConnectedTo</h4>
+				
+				<div th:if="${#maps.containsKey(connections, 'facebook')}">
+					YOU ARE ALREADY CONNECTED TO Facebook
+					<div th:each="connection : ${connections['facebook']}">
+						<span th:text="${connection.displayName}"></span>
+					</div>
+					<form th:substituteby="common/miscellaneous :: disconnect_facebook"></form>
+				</div>
+				<div th:unless="${#maps.containsKey(connections, 'facebook')}">
+					<form name="fb_connect" id="fb_connect" th:action="@{/connect/facebook}" method="POST">
+					    <input type="hidden" name="scope" value="publish_stream,user_photos,offline_access" />
+					    <input type="submit" value="Connect to Facebook" />
+					</form>
+				</div>
+
+				<div th:if="${#maps.containsKey(connections, 'linkedin')}">
+					YOU ARE ALREADY CONNECTED TO LinkedIn
+					<div th:each="connection : ${connections['linkedin']}">
+						<span th:text="${connection.displayName}"></span>
+					</div>
+					<form th:substituteby="common/miscellaneous :: disconnect_linkedin"></form>
+				</div>
+				<div th:unless="${#maps.containsKey(connections, 'linkedin')}">
+					<form name="fb_linkedin" id="fb_linkedin" th:action="@{/connect/linkedin}" method="POST">
+					    <input type="submit" value="Connect to LinkedIn" />
+					</form>
+				</div>
+				
+				<div th:if="${#maps.containsKey(connections, 'twitter')}">
+					YOU ARE ALREADY CONNECTED TO Twitter
+					<div th:each="connection : ${connections['twitter']}">
+						<span th:text="${connection.displayName}"></span>
+					</div>
+					<form th:substituteby="common/miscellaneous :: disconnect_twitter"></form>
+				</div>
+				<div th:unless="${#maps.containsKey(connections, 'twitter')}">
+					<form name="fb_twitter" id="fb_twitter" th:action="@{/connect/twitter}" method="POST">
+					    <input type="submit" value="Connect to Twitter" />
+					</form>
+				</div>
+				
+				<div th:if="${#maps.containsKey(connections, 'google')}">
+					YOU ARE ALREADY CONNECTED TO Google
+					<div th:each="connection : ${connections['google']}">
+						<span th:text="${connection.displayName}"></span>
+					</div>
+					<form th:substituteby="common/miscellaneous :: disconnect_google"></form>
+				</div>
+				<div th:unless="${#maps.containsKey(connections, 'google')}">
+					<form name="fb_google" id="fb_google" th:action="@{/connect/google}" method="POST">
+						<input type="hidden" name="scope" value="openid email" />
+					    <input type="submit" value="Connect to Google" />
+					</form>
+				</div>
+
+			<footer th:include="common/footer :: footer" ></footer> 
+		</div>
+	</body>
+	
+</html>

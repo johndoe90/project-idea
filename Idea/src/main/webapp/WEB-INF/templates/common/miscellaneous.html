@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">  
+	<body>		
+		
+		<!-- Signup Forms -->
+	
+		<div th:fragment="signin_local" th:remove="tag">
+			<form id="localSigninForm" th:action="@{/signin}" method="POST" th:object="${localSigninForm}">
+				<fieldset>
+					<label for="email">Email: <span th:if="${#fields.hasErrors('email')}" class="error" th:text="${#fields.errors('email')[0]}"></span></label>
+			        <input type="text" th:field="*{email}" />
+			       	<label for="password">Password: <span th:if="${#fields.hasErrors('password')}" class="error" th:text="${#fields.errors('password')[0]}"></span></label>
+			        <input type="password" th:field="*{password}" />
+			        <input type="submit" value="login" />
+				</fieldset>
+			</form>
+		</div>		     	
+	
+		<form th:fragment="signin_facebook" name="fb_signin" id="fb_signin" th:action="@{/signin/facebook}" method="POST">
+			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
+			<input type="hidden" name="scope" value="publish_stream,user_photos,offline_access"></input>
+			<button type="submit"><img th:src="@{/resources/img/sign-in-with-facebook.png}"></img></button>
+		</form>
+		
+		<form th:fragment="signin_twitter" id="tw_signin" th:action="@{/signin/twitter}" method="POST">
+			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
+		    <button type="submit"><img th:src="@{/resources/img/sign-in-with-twitter-d.png}"></img></button>
+		</form>
+		
+		<form th:fragment="signin_linkedin" name="li_signin" id="li_signin" th:action="@{/signin/linkedin}" method="POST">
+			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
+		    <button type="submit">Sign In with LinkedIn</button>
+		</form>
+		        
+		<form th:fragment="signin_google" name="go_signin" id="go_signin" th:action="@{/signin/google}" method="POST">
+			<!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"></input> -->
+		    <input type="hidden" name="scope" value="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"></input>
+		    <button type="submit">Sign In with Google</button>
+		</form>	
+		
+		<!-- Disconnect Forms -->
+		
+		<form th:fragment="disconnect_facebook" name="fb_disconnect" id="fb_disconnect" th:action="@{/connect/facebook}" method="POST">
+		   <button type="submit">Disconnect</button>	
+		   <input type="hidden" name="_method" value="delete" />
+		</form>
+		
+		<form th:fragment="disconnect_twitter" name="tw_disconnect" id="tw_disconnect" th:action="@{/connect/twitter}" method="POST">
+		   <button type="submit">Disconnect</button>	
+		   <input type="hidden" name="_method" value="delete" />
+		</form>
+		
+		<form th:fragment="disconnect_linkedin" name="li_disconnect" id="li_disconnect" th:action="@{/connect/linkedin}" method="POST">
+		   <button type="submit">Disconnect</button>	
+		   <input type="hidden" name="_method" value="delete" />
+		</form>
+		
+		<form th:fragment="disconnect_google" name="go_disconnect" id="go_disconnect" th:action="@{/connect/google}" method="POST">
+		   <button type="submit">Disconnect</button>	
+		   <input type="hidden" name="_method" value="delete" />
+		</form>
+		
+	</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+    
+    <head th:include="common/head :: head" th:with="title='Home'"></head>
+    
+	<body>
+		<div class="container">
+			<header th:include="common/header :: header"></header>
+						
+						
+				<!-- 
+				<a id="more" href="javascript:void(0);">load more</a>			
+				<div id="commentContainer" page="0">
+					<div id="addCommentContainer" sec:authorize="hasRole('ROLE_USER')" style="border: 1px solid green;">
+						<input id="body" type="text" />
+						<input id="addComment" type="button" value="add Comment" />
+					</div>
+				</div>
+				-->
+				
+				<div id="commentSection">
+					<div>
+						<input id="commentBody" type="text" />
+						<input id="addComment" type="button" value="addComment" th:disabled="${not #authorization.expression('hasRole(''ROLE_USER'')')}"/>
+					</div>
+					<div id="commentContainer" page="0" size="5">
+					</div>
+					<div id="showMore">
+						<a href="javascript:void(0);">Show more</a>
+					</div>
+				</div>
+
+			<footer th:include="common/footer :: footer" ></footer> 
+		</div>
+		
+		<script type="text/javascript" th:src="@{/resources/js/comment.js}"></script>
+	</body>
+	
+</html>

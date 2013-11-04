@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org">
+    
+    <head th:include="common/head :: head" th:with="title='Home'"></head>
+    
+	<body>
+		<div class="container">
+			<header th:include="common/header :: header"></header>
+				
+				<p th:text="#{home.welcome}"></p>
+				
+				<div sec:authorize="hasRole('ROLE_USER')">
+					<span th:text="${'Logged in as ' + #authentication.principal.username}"></span>
+				</div>
+				<a sec:authorize="${not hasRole('ROLE_USER')}" th:href="@{/signin}">Signin</a>
+				<form sec:authorize="hasRole('ROLE_USER')" th:action="@{/logout}" method="POST">
+					<input type="submit" value="Log Out" />
+				</form>
+				
+				<h3>Threads: </h3>
+				
+				<div class="masonry_container">
+					<p th:each="thread : ${threads}">
+						<a th:href="@{/(thread=${thread.uuid})}" th:text="${thread.uuid}"></a>
+					</p>
+				</div>
+	
+			<footer th:include="common/footer :: footer" ></footer> 
+			
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('.masonry_container').masonry();
+				});
+			</script>
+		</div>
+	</body>
+</html>
+
+
+
+
